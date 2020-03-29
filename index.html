@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://visualia.github.io/visualia/dist/visualia.css"
+    />
+    <link rel="stylesheet" href="./dist/editor.css" />
+    <style>
+      #app {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { visualia } from " https://visualia.github.io/visualia/dist/visualia.js";
+      import { VMonaco } from "./VMonaco.js";
+      visualia({ components: { VEditor: VMonaco }, template: `<v-live />` });
+    </script>
+  </body>
+</html>
