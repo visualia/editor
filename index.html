@@ -13,6 +13,9 @@
       #app {
         height: 100vh;
       }
+      :root {
+        --darkpaleblue: #1e1e1e;
+      }
     </style>
   </head>
   <body>
@@ -20,7 +23,9 @@
     <script type="module">
       import { visualia } from " https://visualia.github.io/visualia/dist/visualia.js";
       import { VMonaco } from "./VMonaco.js";
-      visualia({ components: { VEditor: VMonaco }, template: `<v-live />` });
+      visualia({
+        components: { VEditor: VMonaco }
+      });
     </script>
   </body>
 </html>
