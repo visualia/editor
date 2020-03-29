@@ -1,7 +1,8 @@
 import {
   components as rawComponents,
   kebabcase
-} from "https://designstem.github.io/fachwerk/fachwerk.js";
+} from "https://visualia.github.io/visualia/dist/visualia.js";
+import * as monaco from "./dist/editor.js";
 
 const components = Object.entries(rawComponents).map(([key, value]) => {
   return {
@@ -36,14 +37,14 @@ ${value.description || ""}
     .join("\n---\n");
 
 const formatDocs = component =>
-  `[Documentation](https://designstem.github.io/fachwerk/docs/#${component.kebabName}) [Source](https://github.com/designstem/fachwerk/blob/master/src/components/2d/${component.pascalName}.js)`;
+  `[Source](https://github.com/visualia/visualia/blob/master/src/components/${component.pascalName}.js)`;
 
 const tagSuggestions = range => {
   return components.map(c => {
     return {
       label: c.kebabName,
       kind: monaco.languages.CompletionItemKind.Function,
-      documentation: c.about,
+      documentation: c.docs,
       insertText: `<${c.kebabName}>`,
       range
     };
@@ -52,7 +53,7 @@ const tagSuggestions = range => {
 
 export const provideCompletionItems = (model, position) => {
   const word = model.getWordUntilPosition(position);
-  if (word.word == "f-") {
+  if (word.word == "v-") {
     var range = {
       startLineNumber: position.lineNumber,
       endLineNumber: position.lineNumber,
@@ -77,7 +78,7 @@ export const provideHover = (model, position) => {
       endColumn: word.endColumn
     };
 
-    if (word.word.startsWith("f-")) {
+    if (word.word.startsWith("v-")) {
       const component = components.filter(c => c.kebabName == word.word)[0];
 
       if (component) {
@@ -88,7 +89,7 @@ export const provideHover = (model, position) => {
               value: `\`<${component.kebabName}>\``
             },
             {
-              value: `${component.about}`
+              value: `${component.docs || ""}`
             },
             {
               value: formatDocs(component)

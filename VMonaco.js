@@ -23,16 +23,15 @@ export const VMonaco = {
     onMounted(() => {
       // Setting up autcomplete and hover providers
 
-      // monaco.languages.registerCompletionItemProvider("html", {
-      //   provideCompletionItems
-      // });
-      // monaco.languages.registerHoverProvider("html", { provideHover });
+      monaco.languages.registerCompletionItemProvider("html", {
+        provideCompletionItems
+      });
+      monaco.languages.registerHoverProvider("html", { provideHover });
 
       // Setting up editor
 
       const editor = monaco.editor.create(editorNode.value, {
-        value: "",
-        language: "markdown",
+        language: "html",
         theme: "vs-dark",
         fontSize: "15px",
         wordWrap: "wordWrapColumn",
@@ -59,15 +58,15 @@ export const VMonaco = {
       // otherwise we get the recursive loop
 
       watch(
-        () => props.value,
-        value => {
-          if (value !== editor.getValue()) {
+        () => props.content,
+        content => {
+          if (content !== editor.getValue()) {
             model.pushEditOperations(
               [],
               [
                 {
                   range: model.getFullModelRange(),
-                  text: value
+                  text: content
                 }
               ]
             );

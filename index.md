@@ -1,3 +1,3 @@
-```live monaco
-## Hello world
+```live
+
 ```
