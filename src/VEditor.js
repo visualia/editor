@@ -24,6 +24,7 @@ export const VEditor = {
   },
   setup(props) {
     const currentContent = ref(props.content);
+    console.log(currentContent.value);
     watch(
       () => props.content,
       content => (currentContent.value = content)
