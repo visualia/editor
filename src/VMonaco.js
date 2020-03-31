@@ -3,15 +3,15 @@ import {
   ref,
   onMounted
 } from " https://visualia.github.io/visualia/src/deps/vue.js";
-import * as monaco from "../dist/editor.js";
+import * as monaco from "../deps/editor.js";
 import { provideCompletionItems, provideHover } from "./providers.js";
 
 self.MonacoEnvironment = {
   getWorkerUrl: function(moduleId, label) {
     if (label === "html") {
-      return "./dist/html.worker.js";
+      return "./deps/html.worker.js";
     }
-    return "./dist/editor.worker.js";
+    return "./deps/editor.worker.js";
   }
 };
 
