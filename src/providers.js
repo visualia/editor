@@ -2,7 +2,7 @@ import {
   components as rawComponents,
   kebabcase
 } from "https://visualia.github.io/visualia/dist/visualia.js";
-import * as monaco from "./dist/editor.js";
+import * as monaco from "../dist/editor.js";
 
 const components = Object.entries(rawComponents).map(([key, value]) => {
   return {

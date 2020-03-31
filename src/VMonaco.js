@@ -3,7 +3,7 @@ import {
   ref,
   onMounted
 } from " https://visualia.github.io/visualia/src/deps/vue.js";
-import * as monaco from "./dist/editor.js";
+import * as monaco from "../dist/editor.js";
 import { provideCompletionItems, provideHover } from "./providers.js";
 
 self.MonacoEnvironment = {
