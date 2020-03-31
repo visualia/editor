@@ -4,7 +4,10 @@ import {
   onMounted
 } from " https://visualia.github.io/visualia/src/deps/vue.js";
 import * as monaco from "../deps/editor.js";
-import { provideCompletionItems, provideHover } from "./providers.js";
+import {
+  provideComponentsCompletion,
+  provideComponentsHover
+} from "./providers.js";
 
 self.MonacoEnvironment = {
   getWorkerUrl: function(moduleId, label) {
@@ -24,9 +27,11 @@ export const VMonaco = {
       // Setting up autcomplete and hover providers
 
       monaco.languages.registerCompletionItemProvider("html", {
-        provideCompletionItems
+        provideCompletionItems: provideComponentsCompletion
       });
-      monaco.languages.registerHoverProvider("html", { provideHover });
+      monaco.languages.registerHoverProvider("html", {
+        provideHover: provideComponentsHover
+      });
 
       // Setting up editor
 

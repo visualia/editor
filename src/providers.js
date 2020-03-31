@@ -5,7 +5,6 @@ import {
   publicComponentsWithChildren
 } from "https://visualia.github.io/visualia/dist/visualia.js";
 
-console.log();
 import * as monaco from "../deps/editor.js";
 
 const components = Object.entries(rawComponents)
@@ -67,9 +66,9 @@ const tagSuggestions = range => {
   });
 };
 
-export const provideCompletionItems = (model, position) => {
+export const provideComponentsCompletion = (model, position) => {
   const word = model.getWordUntilPosition(position);
-  if (word.word == "v-") {
+  if (word.word == "v") {
     var range = {
       startLineNumber: position.lineNumber,
       endLineNumber: position.lineNumber,
@@ -83,7 +82,7 @@ export const provideCompletionItems = (model, position) => {
   return [];
 };
 
-export const provideHover = (model, position) => {
+export const provideComponentsHover = (model, position) => {
   const word = model.getWordAtPosition(position);
 
   if (word) {
