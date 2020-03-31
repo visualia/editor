@@ -16,9 +16,9 @@ self.MonacoEnvironment = {
 };
 
 export const VMonaco = {
-  props: { value: { default: "" } },
+  props: { content: { default: "" } },
   setup(props, { emit }) {
-    const editorNode = ref(null);
+    const el = ref(null);
 
     onMounted(() => {
       // Setting up autcomplete and hover providers
@@ -30,7 +30,7 @@ export const VMonaco = {
 
       // Setting up editor
 
-      const editor = monaco.editor.create(editorNode.value, {
+      const editor = monaco.editor.create(el.value, {
         language: "html",
         theme: "vs-dark",
         fontSize: "15px",
@@ -75,9 +75,9 @@ export const VMonaco = {
       );
     });
 
-    return { editorNode };
+    return { el };
   },
   template: `
-    <div ref="editorNode" style="height: 100vh" />
+    <div ref="el" style="height: 100vh" />
   `
 };
