@@ -4,6 +4,8 @@ import {
 } from "https://visualia.github.io/visualia/dist/visualia.js";
 import * as monaco from "../deps/editor.js";
 
+const componentsWithChildren = ["VScene", "VMath", "VGroup"];
+
 const components = Object.entries(rawComponents).map(([key, value]) => {
   return {
     pascalName: key,
@@ -41,11 +43,19 @@ const formatDocs = component =>
 
 const tagSuggestions = range => {
   return components.map(c => {
+    let snippet = "";
+    if (componentsWithChildren.includes(c.pascalName)) {
+      snippet = `<${c.kebabName}>\n  $0\n</${c.kebabName}>`;
+    } else {
+      snippet = `<${c.kebabName} />$0`;
+    }
     return {
       label: c.kebabName,
       kind: monaco.languages.CompletionItemKind.Function,
+      insertTextRules:
+        monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      insertText: snippet,
       documentation: c.docs,
-      insertText: `<${c.kebabName}>`,
       range
     };
   });
