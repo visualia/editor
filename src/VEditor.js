@@ -34,6 +34,7 @@ export const VEditor = {
   },
   template: `
   <div style="display: grid; grid-template-columns: 1fr 1fr; height: 100vh;">
+
       <div style="display: flex; flex-direction: column;">
         <v-save
           style="--darkpaleblue: #1e1e1e;"
@@ -51,7 +52,13 @@ export const VEditor = {
       <v-content
         style="overflow: auto; height: 100vh;"
         :content="currentContent"
+        @input:content="content => currentContent = content"
       />
+    </div>
+    <v-content
+      style="overflow: auto; height: 100vh;"
+      :content="currentContent"
+    />
   </div>
   `
 };
