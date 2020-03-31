@@ -1,19 +1,25 @@
 import {
   components as rawComponents,
-  kebabcase
+  kebabcase,
+  publicComponents,
+  publicComponentsWithChildren
 } from "https://visualia.github.io/visualia/dist/visualia.js";
+
+console.log();
 import * as monaco from "../deps/editor.js";
 
-const componentsWithChildren = ["VScene", "VMath", "VGroup"];
-
-const components = Object.entries(rawComponents).map(([key, value]) => {
-  return {
-    pascalName: key,
-    kebabName: kebabcase(key),
-    about: value.description ? value.description.trim().split(/\n/)[0] : "",
-    ...value
-  };
-});
+const components = Object.entries(rawComponents)
+  .filter(([key]) =>
+    [...publicComponents, ...publicComponentsWithChildren].includes(key)
+  )
+  .map(([key, value]) => {
+    return {
+      pascalName: key,
+      kebabName: kebabcase(key),
+      about: value.docs ? value.docs.trim().split(/\n/)[0] : "",
+      ...value
+    };
+  });
 
 const formatType = typename => {
   if (!Array.isArray(typename)) {
@@ -44,7 +50,7 @@ const formatDocs = component =>
 const tagSuggestions = range => {
   return components.map(c => {
     let snippet = "";
-    if (componentsWithChildren.includes(c.pascalName)) {
+    if (publicComponentsWithChildren.includes(c.pascalName)) {
       snippet = `<${c.kebabName}>\n  $0\n</${c.kebabName}>`;
     } else {
       snippet = `<${c.kebabName} />$0`;
