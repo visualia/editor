@@ -3,5 +3,5 @@ import { VEditor } from "./src/VEditor.js";
 
 visualia({
   components: { VEditor },
-  template: `<v-editor />`
+  template: `<v-editor content="hello" />`
 });
