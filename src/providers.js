@@ -84,7 +84,7 @@ export const provideComponentsCompletion = (model, position) => {
 
 export const provideComponentsHover = (model, position) => {
   const word = model.getWordAtPosition(position);
-
+  console.log(model.getWordAtPosition(position));
   if (word) {
     var range = {
       startLineNumber: position.lineNumber,

@@ -23,20 +23,45 @@ export const VMonaco = {
   setup(props, { emit }) {
     const el = ref(null);
 
+    monaco.languages.register({ id: "visualia" });
+
+    // https://github.com/microsoft/monaco-languages/blob/master/src/markdown/markdown.ts
+    monaco.languages
+      .getLanguages()
+      .filter(({ id }) => id == "markdown")[0]
+      .loader()
+      .then(({ language }) => {
+        language.tokenizer.html = [
+          [/<([\w-]+)\/>/, "tag"],
+          [
+            /<([\w-]+)/,
+            {
+              cases: {
+                "@empty": { token: "tag", next: "@tag.$1" },
+                "@default": { token: "tag", next: "@tag.$1" }
+              }
+            }
+          ],
+          [/<\/([\w-]+)\s*>/, { token: "tag" }],
+          [/<!--/, "comment", "@comment"]
+        ];
+        monaco.languages.setMonarchTokensProvider("visualia", language);
+      });
+
     onMounted(() => {
       // Setting up autcomplete and hover providers
 
-      monaco.languages.registerCompletionItemProvider("html", {
+      monaco.languages.registerCompletionItemProvider("visualia", {
         provideCompletionItems: provideComponentsCompletion
       });
-      monaco.languages.registerHoverProvider("html", {
+      monaco.languages.registerHoverProvider("visualia", {
         provideHover: provideComponentsHover
       });
 
       // Setting up editor
 
       const editor = monaco.editor.create(el.value, {
-        language: "html",
+        language: "visualia",
         theme: "vs-dark",
         fontSize: "15px",
         wordWrap: "wordWrapColumn",
