@@ -84,7 +84,6 @@ export const provideComponentsCompletion = (model, position) => {
 
 export const provideComponentsHover = (model, position) => {
   const word = model.getWordAtPosition(position);
-
   if (word) {
     var range = {
       startLineNumber: position.lineNumber,
@@ -93,6 +92,7 @@ export const provideComponentsHover = (model, position) => {
       endColumn: word.endColumn
     };
 
+    //    if (word.word.startsWith("v-")) {
     if (word.word.startsWith("v-")) {
       const component = components.filter(c => c.kebabName == word.word)[0];
 
