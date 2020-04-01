@@ -24,13 +24,16 @@ export const VMonaco = {
     const el = ref(null);
 
     monaco.languages.register({ id: "visualia" });
-
     // https://github.com/microsoft/monaco-languages/blob/master/src/markdown/markdown.ts
     monaco.languages
       .getLanguages()
       .filter(({ id }) => id == "markdown")[0]
       .loader()
-      .then(({ language }) => {
+      .then(({ language, conf }) => {
+        // https://github.com/microsoft/monaco-languages/blob/master/src/html/html.ts#L17
+        conf.wordPattern = /(-?\d*\.\d\w*)|([^\`\~\!\@\$\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\s]+)/g;
+        monaco.languages.setLanguageConfiguration("visualia", conf);
+
         language.tokenizer.html = [
           [/<([\w-]+)\/>/, "tag"],
           [
