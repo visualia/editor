@@ -6,10 +6,12 @@ import {
 } from "https://visualia.github.io/visualia/dist/visualia.js";
 
 import * as monaco from "../deps/editor.js";
-
-const components = Object.entries(rawComponents)
+import { VSlider2 } from "../VSlider2.js";
+const components = Object.entries({ ...rawComponents, VSlider2 })
   .filter(([key]) =>
-    [...publicComponents, ...publicComponentsWithChildren].includes(key)
+    [...publicComponents, ...publicComponentsWithChildren, "VSlider2"].includes(
+      key
+    )
   )
   .map(([key, value]) => {
     return {
