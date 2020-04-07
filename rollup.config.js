@@ -5,35 +5,26 @@ import css from "rollup-plugin-css-porter";
 
 export default [
   {
-    input: "./src/editor.js",
+    input: "./editor.js",
     output: {
-      dir: "./deps",
+      dir: "./dist",
       format: "es",
-      chunkFileNames: "[name].js"
+      chunkFileNames: "[name].js",
     },
     plugins: [
-      css({ dest: "./deps/editor.css" }),
+      css({ dest: "./dist/editor.css" }),
       resolve(),
       commonjs(),
-      terser()
-    ]
+      terser(),
+    ],
   },
   {
     input: "node_modules/monaco-editor/esm/vs/editor/editor.worker.js",
     output: {
       file: "./deps/editor.worker.js",
       format: "umd",
-      name: "editor"
+      name: "editor",
     },
-    plugins: [resolve(), commonjs(), terser()]
+    plugins: [resolve(), commonjs(), terser()],
   },
-  {
-    input: "node_modules/monaco-editor/esm/vs/language/html/html.worker.js",
-    output: {
-      file: "./deps/html.worker.js",
-      format: "umd",
-      name: "html"
-    },
-    plugins: [resolve(), commonjs(), terser()]
-  }
 ];
