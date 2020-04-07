@@ -14,8 +14,13 @@ https://github.com/microsoft/monaco-editor packaged as ready-to-use ESM module
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://visualia.github.io/editor/deps/editor.min.css"
+      href="https://visualia.github.io/editor/dist/editor.min.css"
     />
+    <style>
+      #app {
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -37,7 +42,7 @@ window.MonacoEnvironment = {
 };
 
 monaco.editor.create(document.getElementById("app"), {
-  value: "function hello() {\n\talert('Hello world!');\n}",
-  language: "javascript",
+  value: "# Hello",
+  language: "markdown",
 });
 ```
