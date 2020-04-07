@@ -21,7 +21,7 @@ export default [
   {
     input: "node_modules/monaco-editor/esm/vs/editor/editor.worker.js",
     output: {
-      file: "./deps/editor.worker.js",
+      file: "./dist/editor.worker.js",
       format: "umd",
       name: "editor",
     },
